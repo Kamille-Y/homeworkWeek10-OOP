@@ -8,16 +8,14 @@ const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager")
 //generate html file path?
 const OUTPUT_DIR = path.resolve(__dirname, "output")
-const outputPath = path.join(OUTPUT_DIR, "team.html");
+const outputPath = path.join(OUTPUT_DIR, "index.html");
 
 const render = require("./src/Employee-teamplate.js");
 
-
-
-
 //Global array of objects that hold team members teamMem memberArray
 const employeeTeam = [];
-const memberArray=[];
+const idArray = [];
+
 
 
 function appMenu() {
@@ -42,6 +40,7 @@ function appMenu() {
           message: "What is the team manager's id?",
           validate: answer => {
             const pass = answer.match(
+              // this is regex expressions calls a numeric string
               /^[1-9]\d*$/
             );
             if (pass) {
@@ -70,6 +69,7 @@ function appMenu() {
           message: "What is the team manager's office number?",
           validate: answer => {
             const pass = answer.match(
+              // regex expression that calls numeric strings
               /^[1-9]\d*$/
             );
             if (pass) {
@@ -81,17 +81,18 @@ function appMenu() {
       ]).then(answers => {
         const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNumber);
         employeeTeam.push(manager);
-        memberArray.push(answers.managerId);
-        createTeam();
+      idArray.push(answers.managerId);
+        buildTeam2
+        13();
       });
     }
   
-    function createTeam() {
+    function buildTeam() {
   
       inquirer.prompt([
         {
           type: "list",
-          name: "memberChoice",
+          name: "teamMember",
           message: "Which type of team member would you like to add?",
           choices: [
             "Engineer",
@@ -100,7 +101,7 @@ function appMenu() {
           ]
         }
       ]).then(userChoice => {
-        switch (userChoice.memberChoice) {
+        switch (userChoice.teamMember) {
           case "Engineer":
             addEngineer();
             break;
@@ -173,8 +174,8 @@ function appMenu() {
       ]).then(answers => {
         const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGithub);
         employeeTeam.push(engineer);
-        memberArray.push(answers.engineerId);
-        createTeam();
+      idArray.push(answers.engineerId);
+        buildTeam();
       });
     }
   
@@ -238,8 +239,8 @@ function appMenu() {
       ]).then(answers => {
         const intern = new Intern(answers.internName, answers.internId, answers.internEmail, answers.internSchool);
         employeeTeam.push(intern);
-        memberArray.push(answers.internId);
-        createTeam();
+      idArray.push(answers.internId);
+        buildTeam();
       });
     }
   
@@ -248,7 +249,8 @@ function appMenu() {
       if (!fs.existsSync(OUTPUT_DIR)) {
         fs.mkdirSync(OUTPUT_DIR)
       }
-      fs.writeFileSync(outputPath, render(employeeTeam), "utf-8");
+      fs.
+      iteFileSync(outputPath, render(employeeTeam), "utf-8");
     }
   
     createManager();
