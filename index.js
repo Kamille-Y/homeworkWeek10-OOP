@@ -7,18 +7,17 @@ const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager")
 //generate html file path?
-const OUTPUT_DIR = path.resolve(__dirname, "output")
-const outputPath = path.join(OUTPUT_DIR, "index.html");
-
-const render = require("./src/Employee-teamplate.js");
+const path = require('path');
+const render = require("./src/Employee-template.js");
+// const fs = fs.writeFileSync
 
 //Global array of objects that hold team members teamMem memberArray
 const employeeTeam = [];
-const idArray = [];
+const memberIDArray = [];
 
 
 
-function appMenu() {
+function appChoices() {
 
     function createManager() {
       console.log("Let's build your team!");
@@ -37,7 +36,7 @@ function appMenu() {
         {
           type: "input",
           name: "managerId",
-          message: "What is the team manager's id?",
+          message: "Enter manager's id?",
           validate: answer => {
             const pass = answer.match(
               // this is regex expressions calls a numeric string
@@ -81,9 +80,8 @@ function appMenu() {
       ]).then(answers => {
         const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNumber);
         employeeTeam.push(manager);
-      idArray.push(answers.managerId);
-        buildTeam2
-        13();
+      memberIDArray.push(answers.managerId);
+        buildTeam();
       });
     }
   
@@ -109,7 +107,7 @@ function appMenu() {
             addIntern();
             break;
           default:
-            buildTeam();
+            teamBuilder();
         }
       });
     }
@@ -136,8 +134,8 @@ function appMenu() {
               /^[1-9]\d*$/
             );
             if (pass) {
-              if (memberArray.includes(answer)) {
-                return "This ID is already taken. Please enter a different number.";
+              if (memberIDArray.includes(answer)) {
+                return "This ID is already exist. Please enter a different number.";
               } else {
                 return true;
               }
@@ -174,7 +172,7 @@ function appMenu() {
       ]).then(answers => {
         const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGithub);
         employeeTeam.push(engineer);
-      idArray.push(answers.engineerId);
+      memberIDArray.push(answers.engineerId);
         buildTeam();
       });
     }
@@ -201,7 +199,7 @@ function appMenu() {
               /^[1-9]\d*$/
             );
             if (pass) {
-              if (memberArray.includes(answer)) {
+              if (memberIDArray.includes(answer)) {
                 return "This ID is already taken. Please enter a different number.";
               } else {
                 return true;
@@ -239,23 +237,24 @@ function appMenu() {
       ]).then(answers => {
         const intern = new Intern(answers.internName, answers.internId, answers.internEmail, answers.internSchool);
         employeeTeam.push(intern);
-      idArray.push(answers.internId);
+      memberIDArray.push(answers.internId);
         buildTeam();
       });
     }
   
-    function buildTeam() {
+    function teamBuilder() {
       // Create the output directory if the output path doesn't exist
       if (!fs.existsSync(OUTPUT_DIR)) {
         fs.mkdirSync(OUTPUT_DIR)
       }
-      fs.
-      iteFileSync(outputPath, render(employeeTeam), "utf-8");
+      fs.writeFileSync(outputPath, render(employeeTeam), "utf-8");
     }
   
     createManager();
   
   }
   
-  appMenu();
+  appChoices();
+  const OUTPUT_DIR = path.resolve(__dirname, "output")
+const outputPath = path.join(OUTPUT_DIR, "index.html");
   
