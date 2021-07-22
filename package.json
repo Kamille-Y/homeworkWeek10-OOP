@@ -1,0 +1,31 @@
+{
+  "name": "homeworkweek10-oop",
+  "version": "1.0.0",
+  "description": "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kamille-Y/homeworkWeek10-OOP.git"
+  },
+  "author": "Kamille Young",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kamille-Y/homeworkWeek10-OOP/issues"
+  },
+  "homepage": "https://github.com/Kamille-Y/homeworkWeek10-OOP#readme",
+  "dependencies": {
+    "inquirer": "^8.1.1"
+  },
+  "devDependencies": {
+    "jest": "^27.0.6"
+  }
+  
+}
+
