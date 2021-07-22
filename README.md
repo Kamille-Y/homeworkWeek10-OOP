@@ -1,7 +1,7 @@
 
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
   
-  # Project Title
+  # On the Spot Employee Generator
   Employee HTML Generator
   ##  Description
   Dynamically generate an html employee log
